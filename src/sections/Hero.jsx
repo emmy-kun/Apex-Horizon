@@ -26,8 +26,10 @@ export default function Hero() {
 
       {/* MAIN LAYOUT */}
       <div className="relative z-10 mx-auto flex h-full max-w-[1300px] flex-col md:flex-row px-6 md:px-8">
-        {/* TOP LEFT */}
-        <div className="flex flex-1 flex-col justify-start pt-40 md:pt-48 lg:pt-52">
+
+        {/* LEFT SIDE */}
+        <div className="flex flex-1 flex-col justify-start pt-32 md:pt-36 lg:pt-40">
+
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,18 +44,17 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9 }}
             className="
-  mt-5
-  font-[Cormorant_Garamond]
-  text-4xl
-  sm:text-5xl
-  md:text-6xl
-  lg:text-[4.8rem]
-  xl:text-[5.3rem]
-  font-semibold
-  leading-[1]
-  tracking-[-0.03em]
-  text-white
-"
+              mt-5
+              font-[Cormorant_Garamond]
+              text-5xl
+              sm:text-6xl
+              md:text-[5rem]
+              lg:text-[5.8rem]
+              font-semibold
+              leading-[0.9]
+              tracking-tight
+              text-white
+            "
           >
             Luxury Homes
             <br />
@@ -61,11 +62,14 @@ export default function Hero() {
             <br />
             Modern Living
           </motion.h1>
+
         </div>
 
-        {/* BOTTOM RIGHT */}
-        <div className="flex flex-1 flex-col justify-end pb-16 md:pb-24 lg:pb-28">
+        {/* RIGHT SIDE */}
+        <div className="flex flex-1 flex-col justify-end pb-12 md:pb-16 lg:pb-20">
+
           <div className="ml-0 md:ml-auto max-w-md text-left md:text-right">
+
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -73,7 +77,7 @@ export default function Hero() {
               className="
                 text-sm
                 sm:text-base
-                md:text-lg
+                md:text-[17px]
                 leading-relaxed
                 text-zinc-300
               "
@@ -88,7 +92,7 @@ export default function Hero() {
               className="
                 text-sm
                 sm:text-base
-                md:text-lg
+                md:text-[17px]
                 leading-relaxed
                 text-zinc-300
               "
@@ -103,7 +107,7 @@ export default function Hero() {
               className="
                 text-sm
                 sm:text-base
-                md:text-lg
+                md:text-[17px]
                 leading-relaxed
                 text-zinc-300
               "
@@ -117,8 +121,7 @@ export default function Hero() {
               transition={{ delay: 1.1, duration: 0.7 }}
               onClick={() => navigate("/properties")}
               className="
-                mt-6
-                md:mt-8
+                mt-7
                 mx-auto
                 md:ml-auto
                 md:mr-0
@@ -131,7 +134,7 @@ export default function Hero() {
                 py-3
                 text-xs
                 uppercase
-                tracking-wider
+                tracking-[0.2em]
                 text-white
                 backdrop-blur-md
                 transition
@@ -141,8 +144,11 @@ export default function Hero() {
             >
               Explore Collections
             </motion.button>
+
           </div>
+
         </div>
+
       </div>
 
       {/* Bottom Fade */}
