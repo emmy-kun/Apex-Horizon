@@ -27,9 +27,8 @@ export default function Hero() {
       {/* MAIN LAYOUT */}
       <div className="relative z-10 mx-auto flex h-full max-w-[1300px] flex-col md:flex-row px-6 md:px-8">
 
-        {/* LEFT SIDE */}
-        <div className="flex flex-1 flex-col justify-start pt-32 md:pt-36 lg:pt-40">
-
+        {/* TOP LEFT */}
+        <div className="flex flex-1 flex-col justify-start pt-32 md:pt-40 lg:pt-44">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,13 +45,14 @@ export default function Hero() {
             className="
               mt-5
               font-[Cormorant_Garamond]
-              text-5xl
-              sm:text-6xl
-              md:text-[5rem]
-              lg:text-[5.8rem]
+              text-4xl
+              sm:text-5xl
+              md:text-6xl
+              lg:text-[4.8rem]
+              xl:text-[5.3rem]
               font-semibold
-              leading-[0.9]
-              tracking-tight
+              leading-[1]
+              tracking-[-0.03em]
               text-white
             "
           >
@@ -62,12 +62,10 @@ export default function Hero() {
             <br />
             Modern Living
           </motion.h1>
-
         </div>
 
-        {/* RIGHT SIDE */}
-        <div className="flex flex-1 flex-col justify-end pb-12 md:pb-16 lg:pb-20">
-
+        {/* BOTTOM RIGHT */}
+        <div className="flex flex-1 flex-col justify-end pb-10 md:pb-24 lg:pb-28">
           <div className="ml-0 md:ml-auto max-w-md text-left md:text-right">
 
             <motion.p
@@ -77,7 +75,7 @@ export default function Hero() {
               className="
                 text-sm
                 sm:text-base
-                md:text-[17px]
+                md:text-lg
                 leading-relaxed
                 text-zinc-300
               "
@@ -92,7 +90,7 @@ export default function Hero() {
               className="
                 text-sm
                 sm:text-base
-                md:text-[17px]
+                md:text-lg
                 leading-relaxed
                 text-zinc-300
               "
@@ -107,7 +105,7 @@ export default function Hero() {
               className="
                 text-sm
                 sm:text-base
-                md:text-[17px]
+                md:text-lg
                 leading-relaxed
                 text-zinc-300
               "
@@ -121,7 +119,8 @@ export default function Hero() {
               transition={{ delay: 1.1, duration: 0.7 }}
               onClick={() => navigate("/properties")}
               className="
-                mt-7
+                mt-6
+                md:mt-8
                 mx-auto
                 md:ml-auto
                 md:mr-0
@@ -134,7 +133,7 @@ export default function Hero() {
                 py-3
                 text-xs
                 uppercase
-                tracking-[0.2em]
+                tracking-wider
                 text-white
                 backdrop-blur-md
                 transition
@@ -146,7 +145,6 @@ export default function Hero() {
             </motion.button>
 
           </div>
-
         </div>
 
       </div>
