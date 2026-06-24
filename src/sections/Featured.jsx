@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import property1 from "../assets/property1.jpg";
@@ -82,15 +82,6 @@ export default function Featured() {
 
   const [current, setCurrent] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
-  const [showSwipeHint, setShowSwipeHint] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSwipeHint(false);
-    }, 4000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const nextSlide = () => {
     setCurrent((prev) =>
@@ -152,59 +143,63 @@ export default function Featured() {
               "
             />
 
-            {/* Mobile Swipe Arrows */}
-            {showSwipeHint && (
-              <>
-                <div
-                  className="
-                    md:hidden
-                    absolute
-                    left-4
-                    top-1/2
-                    -translate-y-1/2
-                    flex h-10 w-10 items-center justify-center
-                    rounded-full
-                    bg-black/40
-                    backdrop-blur-md
-                    border border-white/10
-                    text-xl
-                    text-white
-                    animate-pulse
-                    pointer-events-none
-                    z-10
-                  "
-                >
-                  ←
-                </div>
+            {/* Mobile Left Arrow */}
+            <button
+              onClick={prevSlide}
+              className="
+                md:hidden
+                absolute
+                left-4
+                top-1/2
+                -translate-y-1/2
+                z-20
+                flex
+                h-11
+                w-11
+                items-center
+                justify-center
+                rounded-full
+                bg-black/50
+                border
+                border-white/10
+                backdrop-blur-md
+                text-xl
+                text-white
+              "
+            >
+              ←
+            </button>
 
-                <div
-                  className="
-                    md:hidden
-                    absolute
-                    right-4
-                    top-1/2
-                    -translate-y-1/2
-                    flex h-10 w-10 items-center justify-center
-                    rounded-full
-                    bg-black/40
-                    backdrop-blur-md
-                    border border-white/10
-                    text-xl
-                    text-white
-                    animate-pulse
-                    pointer-events-none
-                    z-10
-                  "
-                >
-                  →
-                </div>
-              </>
-            )}
+            {/* Mobile Right Arrow */}
+            <button
+              onClick={nextSlide}
+              className="
+                md:hidden
+                absolute
+                right-4
+                top-1/2
+                -translate-y-1/2
+                z-20
+                flex
+                h-11
+                w-11
+                items-center
+                justify-center
+                rounded-full
+                bg-black/50
+                border
+                border-white/10
+                backdrop-blur-md
+                text-xl
+                text-white
+              "
+            >
+              →
+            </button>
           </div>
 
           {/* Content */}
           <div>
-
             <p className="text-lg text-zinc-400">
               {properties[current].price}
             </p>
@@ -225,21 +220,27 @@ export default function Featured() {
             <div className="mt-8 flex flex-wrap items-center gap-5 text-sm text-zinc-300">
 
               <div className="flex items-center gap-2">
-                <span className="text-white">{properties[current].beds}</span>
+                <span className="text-white">
+                  {properties[current].beds}
+                </span>
                 <span className="text-zinc-500">Beds</span>
               </div>
 
               <div className="h-4 w-px bg-white/10"></div>
 
               <div className="flex items-center gap-2">
-                <span className="text-white">{properties[current].baths}</span>
+                <span className="text-white">
+                  {properties[current].baths}
+                </span>
                 <span className="text-zinc-500">Baths</span>
               </div>
 
               <div className="h-4 w-px bg-white/10"></div>
 
               <div className="flex items-center gap-2">
-                <span className="text-white">{properties[current].area}</span>
+                <span className="text-white">
+                  {properties[current].area}
+                </span>
               </div>
 
             </div>
@@ -264,10 +265,8 @@ export default function Featured() {
             </button>
 
           </div>
-
-        </div>
-
-        {/* Desktop Navigation */}
+        </div> 
+                {/* Desktop Navigation */}
         <div className="mt-14 hidden md:flex items-center justify-center gap-6">
 
           <button
@@ -287,6 +286,7 @@ export default function Featured() {
           </button>
 
           <div className="flex gap-2">
+
             {properties.map((_, index) => (
               <button
                 key={index}
@@ -298,6 +298,7 @@ export default function Featured() {
                 }`}
               />
             ))}
+
           </div>
 
           <button
