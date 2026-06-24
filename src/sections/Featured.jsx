@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import property1 from "../assets/property1.jpg";
@@ -82,6 +82,15 @@ export default function Featured() {
 
   const [current, setCurrent] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
+  const [showSwipeHint, setShowSwipeHint] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSwipeHint(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const nextSlide = () => {
     setCurrent((prev) =>
@@ -102,9 +111,8 @@ export default function Featured() {
     >
       <div className="mx-auto max-w-[1300px] px-6 md:px-8">
 
-        {/* HEADER */}
+        {/* Header */}
         <div className="text-center">
-
           <p className="text-[10px] uppercase tracking-[0.45em] text-zinc-500">
             Featured Collection
           </p>
@@ -112,29 +120,21 @@ export default function Featured() {
           <h2 className="mt-6 font-[Cormorant_Garamond] text-3xl md:text-5xl font-semibold leading-[1.05]">
             Featured Properties
           </h2>
-
         </div>
 
-        {/* MAIN */}
+        {/* Main Section */}
         <div className="mt-16 md:mt-20 grid items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
 
-          {/* IMAGE */}
+          {/* Image */}
           <div
-            className="group overflow-hidden rounded-[1.75rem]"
-            onTouchStart={(e) =>
-              setTouchStartX(e.touches[0].clientX)
-            }
+            className="group relative overflow-hidden rounded-[1.75rem]"
+            onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
             onTouchEnd={(e) => {
               const touchEndX = e.changedTouches[0].clientX;
-              const diff = touchStartX - touchEndX;
+              const distance = touchStartX - touchEndX;
 
-              if (diff > 50) {
-                nextSlide();
-              }
-
-              if (diff < -50) {
-                prevSlide();
-              }
+              if (distance > 50) nextSlide();
+              if (distance < -50) prevSlide();
             }}
           >
             <img
@@ -151,20 +151,46 @@ export default function Featured() {
                 group-hover:scale-105
               "
             />
+
+            {/* Swipe Hint */}
+            {showSwipeHint && (
+              <div
+                className="
+                  md:hidden
+                  absolute
+                  bottom-5
+                  left-1/2
+                  -translate-x-1/2
+                  rounded-full
+                  border border-white/10
+                  bg-white/10
+                  px-5
+                  py-2
+                  backdrop-blur-xl
+                  text-[11px]
+                  uppercase
+                  tracking-[0.2em]
+                  text-white
+                  animate-pulse
+                "
+              >
+                ◄ Swipe To Explore ►
+              </div>
+            )}
           </div>
 
-          {/* CONTENT */}
+          {/* Content */}
           <div>
 
-            <p className="text-base text-zinc-400">
+            <p className="text-lg text-zinc-400">
               {properties[current].price}
             </p>
 
-            <h3 className="mt-5 font-[Cormorant_Garamond] text-3xl md:text-4xl font-semibold leading-[1]">
+            <h3 className="mt-5 font-[Cormorant_Garamond] text-3xl md:text-4xl font-semibold leading-[1.02]">
               {properties[current].title}
             </h3>
 
-            <p className="mt-3 text-[11px] uppercase tracking-[0.3em] text-zinc-500">
+            <p className="mt-3 text-xs uppercase tracking-[0.3em] text-zinc-500">
               {properties[current].location}
             </p>
 
@@ -172,40 +198,30 @@ export default function Featured() {
               {properties[current].description}
             </p>
 
-            {/* SPECS */}
+            {/* Specs */}
             <div className="mt-8 flex flex-wrap items-center gap-5 text-sm text-zinc-300">
 
               <div className="flex items-center gap-2">
-                <span className="text-white">
-                  {properties[current].beds}
-                </span>
-                <span className="text-zinc-500">
-                  Beds
-                </span>
+                <span className="text-white">{properties[current].beds}</span>
+                <span className="text-zinc-500">Beds</span>
               </div>
 
               <div className="h-4 w-px bg-white/10"></div>
 
               <div className="flex items-center gap-2">
-                <span className="text-white">
-                  {properties[current].baths}
-                </span>
-                <span className="text-zinc-500">
-                  Baths
-                </span>
+                <span className="text-white">{properties[current].baths}</span>
+                <span className="text-zinc-500">Baths</span>
               </div>
 
               <div className="h-4 w-px bg-white/10"></div>
 
               <div className="flex items-center gap-2">
-                <span className="text-white">
-                  {properties[current].area}
-                </span>
+                <span className="text-white">{properties[current].area}</span>
               </div>
 
             </div>
 
-            {/* BUTTON */}
+            {/* Button */}
             <button
               onClick={() => navigate("/properties")}
               className="
@@ -228,8 +244,8 @@ export default function Featured() {
 
         </div>
 
-        {/* DESKTOP NAVIGATION */}
-        <div className="hidden md:flex mt-14 items-center justify-center gap-6">
+        {/* Desktop Navigation */}
+        <div className="mt-14 hidden md:flex items-center justify-center gap-6">
 
           <button
             onClick={prevSlide}
@@ -248,7 +264,6 @@ export default function Featured() {
           </button>
 
           <div className="flex gap-2">
-
             {properties.map((_, index) => (
               <button
                 key={index}
@@ -260,7 +275,6 @@ export default function Featured() {
                 }`}
               />
             ))}
-
           </div>
 
           <button
@@ -278,22 +292,6 @@ export default function Featured() {
           >
             →
           </button>
-
-        </div>
-
-        {/* MOBILE INDICATOR */}
-        <div className="mt-8 flex justify-center gap-2 md:hidden">
-
-          {properties.map((_, index) => (
-            <div
-              key={index}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                current === index
-                  ? "w-8 bg-white"
-                  : "w-2 bg-zinc-700"
-              }`}
-            />
-          ))}
 
         </div>
 
