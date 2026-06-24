@@ -79,7 +79,9 @@ const properties = [
 
 export default function Featured() {
   const navigate = useNavigate();
+
   const [current, setCurrent] = useState(0);
+  const [touchStartX, setTouchStartX] = useState(0);
 
   const nextSlide = () => {
     setCurrent((prev) =>
@@ -100,7 +102,7 @@ export default function Featured() {
     >
       <div className="mx-auto max-w-[1300px] px-6 md:px-8">
 
-        {/* Header */}
+        {/* HEADER */}
         <div className="text-center">
 
           <p className="text-[10px] uppercase tracking-[0.45em] text-zinc-500">
@@ -113,12 +115,28 @@ export default function Featured() {
 
         </div>
 
-        {/* Main Section */}
+        {/* MAIN */}
         <div className="mt-16 md:mt-20 grid items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
 
-          {/* Left Image */}
-          <div className="group overflow-hidden rounded-[1.75rem]">
+          {/* IMAGE */}
+          <div
+            className="group overflow-hidden rounded-[1.75rem]"
+            onTouchStart={(e) =>
+              setTouchStartX(e.touches[0].clientX)
+            }
+            onTouchEnd={(e) => {
+              const touchEndX = e.changedTouches[0].clientX;
+              const diff = touchStartX - touchEndX;
 
+              if (diff > 50) {
+                nextSlide();
+              }
+
+              if (diff < -50) {
+                prevSlide();
+              }
+            }}
+          >
             <img
               src={properties[current].image}
               alt={properties[current].title}
@@ -133,21 +151,20 @@ export default function Featured() {
                 group-hover:scale-105
               "
             />
-
           </div>
 
-          {/* Right Content */}
+          {/* CONTENT */}
           <div>
 
-            <p className="text-lg text-zinc-400">
+            <p className="text-base text-zinc-400">
               {properties[current].price}
             </p>
 
-            <h3 className="mt-5 font-[Cormorant_Garamond] text-3xl md:text-4xl font-semibold leading-[1.05]">
+            <h3 className="mt-5 font-[Cormorant_Garamond] text-3xl md:text-4xl font-semibold leading-[1]">
               {properties[current].title}
             </h3>
 
-            <p className="mt-3 text-xs uppercase tracking-[0.3em] text-zinc-500">
+            <p className="mt-3 text-[11px] uppercase tracking-[0.3em] text-zinc-500">
               {properties[current].location}
             </p>
 
@@ -155,30 +172,40 @@ export default function Featured() {
               {properties[current].description}
             </p>
 
-            {/* Specs */}
+            {/* SPECS */}
             <div className="mt-8 flex flex-wrap items-center gap-5 text-sm text-zinc-300">
 
               <div className="flex items-center gap-2">
-                <span className="text-white">{properties[current].beds}</span>
-                <span className="text-zinc-500">Beds</span>
+                <span className="text-white">
+                  {properties[current].beds}
+                </span>
+                <span className="text-zinc-500">
+                  Beds
+                </span>
               </div>
 
               <div className="h-4 w-px bg-white/10"></div>
 
               <div className="flex items-center gap-2">
-                <span className="text-white">{properties[current].baths}</span>
-                <span className="text-zinc-500">Baths</span>
+                <span className="text-white">
+                  {properties[current].baths}
+                </span>
+                <span className="text-zinc-500">
+                  Baths
+                </span>
               </div>
 
               <div className="h-4 w-px bg-white/10"></div>
 
               <div className="flex items-center gap-2">
-                <span className="text-white">{properties[current].area}</span>
+                <span className="text-white">
+                  {properties[current].area}
+                </span>
               </div>
 
             </div>
 
-            {/* Button */}
+            {/* BUTTON */}
             <button
               onClick={() => navigate("/properties")}
               className="
@@ -201,8 +228,8 @@ export default function Featured() {
 
         </div>
 
-        {/* Bottom Navigation */}
-        <div className="mt-14 flex items-center justify-center gap-6">
+        {/* DESKTOP NAVIGATION */}
+        <div className="hidden md:flex mt-14 items-center justify-center gap-6">
 
           <button
             onClick={prevSlide}
@@ -243,14 +270,30 @@ export default function Featured() {
               w-10
               rounded-full
               bg-white
-              text-lg
               text-black
+              text-lg
               transition
               hover:scale-105
             "
           >
             →
           </button>
+
+        </div>
+
+        {/* MOBILE INDICATOR */}
+        <div className="mt-8 flex justify-center gap-2 md:hidden">
+
+          {properties.map((_, index) => (
+            <div
+              key={index}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                current === index
+                  ? "w-8 bg-white"
+                  : "w-2 bg-zinc-700"
+              }`}
+            />
+          ))}
 
         </div>
 
