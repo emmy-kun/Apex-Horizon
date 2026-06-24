@@ -152,30 +152,53 @@ export default function Featured() {
               "
             />
 
-            {/* Swipe Hint */}
+            {/* Mobile Swipe Arrows */}
             {showSwipeHint && (
-              <div
-                className="
-                  md:hidden
-                  absolute
-                  bottom-5
-                  left-1/2
-                  -translate-x-1/2
-                  rounded-full
-                  border border-white/10
-                  bg-white/10
-                  px-5
-                  py-2
-                  backdrop-blur-xl
-                  text-[11px]
-                  uppercase
-                  tracking-[0.2em]
-                  text-white
-                  animate-pulse
-                "
-              >
-                ◄ Swipe To Explore ►
-              </div>
+              <>
+                <div
+                  className="
+                    md:hidden
+                    absolute
+                    left-4
+                    top-1/2
+                    -translate-y-1/2
+                    flex h-10 w-10 items-center justify-center
+                    rounded-full
+                    bg-black/40
+                    backdrop-blur-md
+                    border border-white/10
+                    text-xl
+                    text-white
+                    animate-pulse
+                    pointer-events-none
+                    z-10
+                  "
+                >
+                  ←
+                </div>
+
+                <div
+                  className="
+                    md:hidden
+                    absolute
+                    right-4
+                    top-1/2
+                    -translate-y-1/2
+                    flex h-10 w-10 items-center justify-center
+                    rounded-full
+                    bg-black/40
+                    backdrop-blur-md
+                    border border-white/10
+                    text-xl
+                    text-white
+                    animate-pulse
+                    pointer-events-none
+                    z-10
+                  "
+                >
+                  →
+                </div>
+              </>
             )}
           </div>
 

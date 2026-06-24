@@ -65,7 +65,7 @@ export default function Hero() {
         </div>
 
         {/* BOTTOM RIGHT */}
-        <div className="flex flex-1 flex-col justify-end pb-10 md:pb-24 lg:pb-28">
+        <div className="flex flex-1 flex-col justify-center md:justify-end pb-0 md:pb-24 lg:pb-28">
           <div className="ml-0 md:ml-auto max-w-md text-left md:text-right">
 
             <motion.p
