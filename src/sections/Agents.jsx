@@ -1,107 +1,179 @@
-import { motion } from "framer-motion";
-import { FaWhatsapp, FaInstagram, FaEnvelope } from "react-icons/fa";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FaWhatsapp,
+  FaInstagram,
+  FaEnvelope,
+  FaArrowLeft,
+  FaArrowRight,
+} from "react-icons/fa";
 
 const agents = [
   {
     name: "James Anderson",
     role: "Luxury Property Specialist",
+    quote:
+      "Helping clients secure exceptional homes with confidence, elegance, and a seamless experience.",
     image:
-      "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200",
+      "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    name: "Daniel Williams",
+    role: "Executive Property Consultant",
+    quote:
+      "Delivering exceptional experiences and helping clients acquire remarkable homes with confidence and discretion.",
+    image:
+      "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=1200&q=80",
   },
   {
     name: "Sophia Williams",
     role: "Senior Property Advisor",
+    quote:
+      "Dedicated to delivering world-class service and connecting clients with remarkable residences.",
     image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=1200",
-  },
-  {
-    name: "Michael Brown",
-    role: "Real Estate Consultant",
-    image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
 export default function Agents() {
+  const [current, setCurrent] = useState(0);
+
+  const nextAgent = () =>
+    setCurrent((prev) => (prev === agents.length - 1 ? 0 : prev + 1));
+
+  const prevAgent = () =>
+    setCurrent((prev) => (prev === 0 ? agents.length - 1 : prev - 1));
+
+  const agent = agents[current];
+
   return (
-    <section id="agents" className="bg-[#050505] py-20 md:py-40 text-white">
-      <div className="mx-auto max-w-[1400px] px-6">
+    <section
+      id="agents"
+      className="bg-[#050505] py-20 md:py-24 text-white"
+    >
+      <div className="mx-auto max-w-[1150px] px-6">
 
         {/* HEADER */}
         <div className="text-center">
-          <p className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] md:tracking-[0.5em] text-zinc-500">
+
+          <p className="text-[10px] uppercase tracking-[0.45em] text-zinc-500">
             Our Agents
           </p>
 
-          <h2 className="mt-6 md:mt-8 font-[Cormorant_Garamond] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
+          <h2 className="mt-5 font-[Cormorant_Garamond] text-3xl md:text-[3rem] leading-none font-semibold">
             Meet The Experts Behind
             <br />
             Exceptional Properties
           </h2>
+
         </div>
 
-        {/* GRID */}
-        <div className="mt-16 md:mt-24 grid gap-10 md:grid-cols-3">
+        {/* CARD */}
+        <div className="mt-16">
 
-          {agents.map((agent, index) => (
+          <AnimatePresence mode="wait">
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="w-full"
+              key={current}
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="
+                rounded-[2rem]
+                border border-white/10
+                bg-white/[0.02]
+                px-6 py-8
+                md:px-10 md:py-10
+              "
             >
+              <div className="flex flex-col md:flex-row items-center gap-10">
 
-              {/* IMAGE */}
-              <div className="overflow-hidden rounded-2xl">
-                <img
-                  src={agent.image}
-                  alt={agent.name}
-                  className="
-                    h-[360px]
-                    sm:h-[420px]
-                    md:h-[460px]
-                    lg:h-[480px]
-                    w-full
-                    object-cover
-                    transition duration-700
-                    hover:scale-105
-                  "
-                />
-              </div>
+                {/* IMAGE */}
+                <div className="shrink-0">
 
-              {/* INFO */}
-              <div className="mt-5 md:mt-6">
+                  <div
+                    className="
+                      h-44 w-44
+                      md:h-56 md:w-56
+                      rounded-full
+                      overflow-hidden
+                      border border-white/10
+                    "
+                  >
+                    <img
+                      src={agent.image}
+                      alt={agent.name}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
 
-                <h3 className="font-[Cormorant_Garamond] text-2xl md:text-3xl font-semibold">
-                  {agent.name}
-                </h3>
+                </div>
 
-                <p className="mt-2 text-sm text-zinc-400">
-                  {agent.role}
-                </p>
+                {/* CONTENT */}
+                <div className="flex-1 text-center md:text-left">
 
-                {/* ICONS */}
-                <div className="mt-4 md:mt-5 flex items-center gap-5 md:gap-6 text-zinc-400">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-500">
+                    {agent.role}
+                  </p>
 
-                  <a className="hover:text-green-400 transition text-lg">
-                    <FaWhatsapp />
-                  </a>
+                  <h3 className="mt-3 font-[Cormorant_Garamond] text-3xl md:text-4xl font-semibold leading-none">
+                    {agent.name}
+                  </h3>
 
-                  <a className="hover:text-pink-400 transition text-lg">
-                    <FaInstagram />
-                  </a>
+                  <p className="mt-5 max-w-xl text-sm md:text-[15px] leading-7 text-zinc-400 italic">
+                    “{agent.quote}”
+                  </p>
 
-                  <a className="hover:text-blue-400 transition text-lg">
-                    <FaEnvelope />
-                  </a>
+                  {/* SOCIALS */}
+                  <div className="mt-7 flex justify-center md:justify-start gap-3">
+
+                    <button className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-zinc-400 hover:bg-white hover:text-black transition">
+                      <FaWhatsapp />
+                    </button>
+
+                    <button className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-zinc-400 hover:bg-white hover:text-black transition">
+                      <FaInstagram />
+                    </button>
+
+                    <button className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-zinc-400 hover:bg-white hover:text-black transition">
+                      <FaEnvelope />
+                    </button>
+
+                  </div>
 
                 </div>
 
               </div>
-
             </motion.div>
-          ))}
+          </AnimatePresence>
+
+          {/* NAVIGATION */}
+          <div className="mt-8 flex justify-end gap-3">
+
+            <button
+              onClick={prevAgent}
+              className="
+                flex h-11 w-11 items-center justify-center
+                rounded-full border border-white/10
+                text-zinc-400 hover:border-white
+                hover:text-white transition
+              "
+            >
+              <FaArrowLeft />
+            </button>
+
+            <button
+              onClick={nextAgent}
+              className="
+                flex h-11 w-11 items-center justify-center
+                rounded-full bg-white text-black
+                transition hover:scale-105
+              "
+            >
+              <FaArrowRight />
+            </button>
+
+          </div>
 
         </div>
 

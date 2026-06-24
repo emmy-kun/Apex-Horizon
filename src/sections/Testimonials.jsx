@@ -44,46 +44,54 @@ export default function Testimonials() {
   const nextPerson = testimonials[(current + 1) % testimonials.length];
 
   return (
-    <section id="testimonials" className="bg-[#050505] py-20 md:py-40 text-white">
-      <div className="mx-auto max-w-[1300px] px-6">
+    <section
+      id="testimonials"
+      className="bg-[#050505] py-20 md:py-24 text-white"
+    >
+      <div className="mx-auto max-w-[1200px] px-6">
 
         {/* Heading */}
         <div className="text-center">
-          <p className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] md:tracking-[0.5em] text-zinc-500">
+          <p className="text-[10px] uppercase tracking-[0.45em] text-zinc-500">
             Testimonials
           </p>
 
-          <h2 className="mt-6 md:mt-8 font-[Cormorant_Garamond] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
+          <h2 className="mt-5 font-[Cormorant_Garamond] text-3xl md:text-[3rem] font-semibold leading-none">
             Trusted By Thousands
             <br />
             Nationwide
           </h2>
         </div>
 
-        {/* MAIN LAYOUT */}
-        <div className="mt-16 md:mt-28 flex flex-col lg:flex-row lg:items-stretch gap-10">
+        {/* Main Layout */}
+        <div className="mt-14 flex flex-col lg:flex-row lg:items-center gap-8">
 
-         {/* LEFT IMAGE */}
-<div className="lg:w-[20%]">
-  <AnimatePresence mode="wait">
-    <motion.div
-      key={testimonials[current].image}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="h-[520px] w-full overflow-hidden rounded-3xl"
-    >
-      <img
-        src={testimonials[current].image}
-        alt=""
-        className="h-full w-full object-cover object-center"
-      />
-    </motion.div>
-  </AnimatePresence>
-</div>
+          {/* Left Image */}
+          <div className="lg:w-[22%]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={testimonials[current].image}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="overflow-hidden rounded-[1.8rem]"
+              >
+                <img
+                  src={testimonials[current].image}
+                  alt=""
+                  className="
+                    h-[320px]
+                    md:h-[400px]
+                    w-full
+                    object-cover
+                  "
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-          {/* CENTER CONTENT */}
-          <div className="flex flex-1 flex-col justify-center px-2 sm:px-4 min-h-[260px] md:min-h-[320px]">
+          {/* Center */}
+          <div className="flex flex-1 flex-col justify-center min-h-[220px]">
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -94,24 +102,26 @@ export default function Testimonials() {
               >
 
                 {/* Stars */}
-                <div className="mb-6 md:mb-8 text-lg md:text-xl text-yellow-400">
+                <div className="mb-5 text-sm text-yellow-400 tracking-[0.15em]">
                   ★★★★★
                 </div>
 
                 {/* Quote */}
-                <p className="max-w-2xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-zinc-300">
+                <p className="max-w-2xl text-sm md:text-[15px] leading-7 text-zinc-300 italic">
                   "{testimonials[current].quote}"
                 </p>
 
                 {/* Name */}
-                <div className="mt-8 md:mt-10">
-                  <h4 className="text-lg sm:text-xl md:text-2xl font-medium">
+                <div className="mt-8">
+
+                  <h4 className="font-[Cormorant_Garamond] text-2xl md:text-3xl leading-none">
                     {testimonials[current].name}
                   </h4>
 
-                  <p className="mt-2 text-sm md:text-base text-zinc-500">
+                  <p className="mt-2 text-xs uppercase tracking-[0.2em] text-zinc-500">
                     {testimonials[current].location}
                   </p>
+
                 </div>
 
               </motion.div>
@@ -119,28 +129,35 @@ export default function Testimonials() {
 
           </div>
 
-          {/* RIGHT COLUMN */}
-          <div className="w-full lg:w-[25%] flex flex-row lg:flex-col justify-between items-center lg:items-end gap-6 lg:gap-0">
+          {/* Right Column */}
+          <div className="w-full lg:w-[18%] flex flex-row lg:flex-col justify-between items-center lg:items-end gap-6">
 
             {/* Preview Image */}
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="overflow-hidden rounded-2xl"
+              className="overflow-hidden rounded-xl"
             >
               <img
                 src={nextPerson.image}
                 alt=""
-                className="h-20 w-20 sm:h-24 sm:w-24 lg:h-28 lg:w-28 object-cover object-[50%_20%]"
+                className="
+                  h-16
+                  w-16
+                  md:h-20
+                  md:w-20
+                  object-cover
+                  object-center
+                "
               />
             </motion.div>
 
             {/* Arrows */}
-            <div className="flex gap-4 lg:mt-auto">
+            <div className="flex gap-3 lg:mt-auto">
 
               <button
                 onClick={prevSlide}
                 className="
-                  flex h-12 w-12 md:h-14 md:w-14 items-center justify-center
+                  flex h-11 w-11 items-center justify-center
                   rounded-full border border-white/10
                   bg-black text-white
                   transition hover:border-white/30
@@ -152,7 +169,7 @@ export default function Testimonials() {
               <button
                 onClick={nextSlide}
                 className="
-                  flex h-12 w-12 md:h-14 md:w-14 items-center justify-center
+                  flex h-11 w-11 items-center justify-center
                   rounded-full bg-white text-black
                   transition hover:scale-105
                 "

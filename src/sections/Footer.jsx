@@ -32,7 +32,7 @@ export default function Footer() {
   </p>
 
   <p className="mt-6 text-xs text-zinc-600">
-    © {new Date().getFullYear()} Apex Horizon. All rights reserved.
+    © {new Date().getFullYear()} Apex Horizon by Eke chukwuemeka. All rights reserved.
   </p>
 
 </div>
@@ -96,6 +96,7 @@ export default function Footer() {
 
           <p>Designed for luxury real estate experiences</p>
           <p>Built with precision & minimal elegance</p>
+          
 
         </div>
 

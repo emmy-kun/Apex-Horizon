@@ -174,7 +174,6 @@ const propertiesData = [
   },
 ];
 
-// OPTIONAL: extra images per property for modal gallery
 const getGallery = (item) => [
   item.image,
   "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000",
@@ -187,9 +186,7 @@ export default function Property() {
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [activeImg, setActiveImg] = useState(0);
 
-  const fullList = [...propertiesData];
-
-  const filtered = fullList.filter((item) => {
+  const filtered = propertiesData.filter((item) => {
     const matchType = filter === "All" || item.type === filter;
     const matchSearch = item.location
       .toLowerCase()
@@ -222,19 +219,30 @@ export default function Property() {
       prev === 0 ? selectedProperty.gallery.length - 1 : prev - 1
     );
   };
-
-  return (
+    return (
     <div className="bg-[#050505] text-white overflow-x-hidden">
       <Navbar />
 
       {/* HERO */}
-      <section className="pt-40 pb-20 px-6">
-        <div className="mx-auto max-w-[1400px]">
-          <p className="text-[11px] uppercase tracking-[0.5em] text-zinc-500">
+      <section className="pt-32 md:pt-36 pb-16 md:pb-20 px-6">
+        <div className="mx-auto max-w-[1280px]">
+
+          <p className="text-[10px] uppercase tracking-[0.4em] text-zinc-500">
             Properties
           </p>
 
-          <h1 className="mt-8 font-[Cormorant_Garamond] text-5xl md:text-7xl font-semibold">
+          <h1
+            className="
+              mt-6
+              font-[Cormorant_Garamond]
+              text-4xl
+              sm:text-5xl
+              md:text-6xl
+              lg:text-[4.8rem]
+              leading-[0.95]
+              font-semibold
+            "
+          >
             Luxury Homes
             <br />
             Around The World
@@ -244,80 +252,159 @@ export default function Property() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by location..."
-            className="mt-10 w-full md:w-1/2 rounded-full border border-white/10 bg-white/5 px-6 py-4 text-white"
+            className="
+              mt-8
+              w-full
+              md:w-[420px]
+              rounded-full
+              border border-white/10
+              bg-white/[0.03]
+              px-5
+              py-3
+              text-sm
+              outline-none
+            "
           />
+
         </div>
       </section>
 
       {/* FILTERS */}
       <section className="px-6">
-        <div className="mx-auto max-w-[1400px] flex flex-wrap gap-4">
+        <div className="mx-auto max-w-[1280px] flex flex-wrap gap-3">
+
           {["All", "Villa", "Apartment", "Penthouse"].map((type) => (
             <button
               key={type}
               onClick={() => setFilter(type)}
-              className={`rounded-full px-8 py-3 border transition ${
-                filter === type
-                  ? "bg-white text-black"
-                  : "border-white/10 hover:bg-white/10"
-              }`}
+              className={`
+                rounded-full
+                px-6
+                py-2.5
+                text-sm
+                border
+                transition
+                ${
+                  filter === type
+                    ? "bg-white text-black border-white"
+                    : "border-white/10 hover:bg-white/[0.05]"
+                }
+              `}
             >
               {type}
             </button>
           ))}
+
         </div>
       </section>
 
-      {/* GRID */}
-      <section className="py-20 px-6">
-        <div className="mx-auto max-w-[1400px] grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      {/* PROPERTY GRID */}
+      <section className="py-16 md:py-20 px-6">
+
+        <div className="mx-auto max-w-[1280px] grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
           {filtered.map((property, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden border border-white/10 rounded-tl-3xl rounded-br-3xl bg-white/[0.02]"
+              className="
+                group
+                overflow-hidden
+                rounded-[2rem]
+                border border-white/10
+                bg-white/[0.02]
+              "
             >
+
               {/* IMAGE */}
-              <div className="relative h-[420px] overflow-hidden">
-                <div className="absolute top-4 left-4 z-10 bg-black/60 text-xs px-3 py-1 rounded-full backdrop-blur">
+              <div className="relative overflow-hidden">
+
+                <div className="absolute left-4 top-4 z-10 rounded-full bg-black/60 px-3 py-1 text-[11px] backdrop-blur">
                   FOR SALE
                 </div>
 
                 <img
                   src={property.image}
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  alt={property.title}
+                  className="
+                    h-[280px]
+                    sm:h-[320px]
+                    lg:h-[340px]
+                    w-full
+                    object-cover
+                    transition duration-700
+                    group-hover:scale-105
+                  "
                 />
+
               </div>
 
               {/* DETAILS */}
-              <div className="p-6">
-                <h2 className="font-[Cormorant_Garamond] text-3xl">
+              <div className="p-5">
+
+                <h2
+                  className="
+                    font-[Cormorant_Garamond]
+                    text-2xl
+                    leading-none
+                    font-semibold
+                  "
+                >
                   {property.title}
                 </h2>
 
-                <p className="text-zinc-500 mt-1">{property.location}</p>
+                <p className="mt-1 text-sm text-zinc-500">
+                  {property.location}
+                </p>
 
-                <div className="mt-6 flex justify-between">
-                  <span>{property.price}</span>
-                  <span>{property.size}</span>
+                {/* PRICE + SIZE */}
+                <div className="mt-5 flex items-center justify-between text-sm">
+
+                  <span className="font-light text-lg">
+                    {property.price}
+                  </span>
+
+                  <span className="text-zinc-500">
+                    {property.size}
+                  </span>
+
                 </div>
 
-                <div className="mt-4 flex justify-between text-sm text-zinc-400">
+                {/* SPECS */}
+                <div className="mt-4 flex items-center justify-between text-xs text-zinc-400">
+
                   <span>{property.beds} Beds</span>
+
                   <span>{property.baths} Baths</span>
+
                   <span>{property.garage} Garage</span>
+
                 </div>
 
-                {/* VIEW DETAILS BUTTON */}
+                {/* BUTTON */}
                 <button
                   onClick={() => openModal(property)}
-                  className="mt-8 w-full rounded-full border border-white/10 bg-white/[0.04] py-4 text-sm transition hover:bg-white/10 hover:scale-[1.02]"
+                  className="
+                    mt-6
+                    w-full
+                    rounded-full
+                    border border-white/10
+                    bg-white/[0.03]
+                    py-3
+                    text-sm
+                    transition
+                    hover:bg-white/[0.08]
+                  "
                 >
                   View Details
                 </button>
+
               </div>
+
             </div>
           ))}
+
         </div>
+
       </section>
 
       {/* MODAL */}

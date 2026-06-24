@@ -1,79 +1,117 @@
 import { motion } from "framer-motion";
-import statsBg from "../assets/stats-bg.jpg";
+import statsImg from "../assets/stats-bg.jpg";
+
+const stats = [
+  {
+    number: "500+",
+    title: "Properties Available",
+  },
+  {
+    number: "98%",
+    title: "Customer Satisfaction",
+  },
+  {
+    number: "25+",
+    title: "Cities Covered",
+  },
+  {
+    number: "15+",
+    title: "Years Experience",
+  },
+];
 
 export default function Stats() {
   return (
-    <section className="relative py-24 md:py-40 overflow-hidden">
+    <section className="bg-[#050505] py-24 md:py-28 text-white">
+      <div className="mx-auto max-w-[1300px] px-6">
 
-      {/* Background Image */}
-      <img
-        src={statsBg}
-        alt=""
-        className="
-          absolute inset-0 h-full w-full
-          object-cover
-          object-center
-        "
-      />
+        <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
 
-      {/* ✅ OVERLAY (THIS IS THE FIX) */}
-      <div className="absolute inset-0 bg-black/40 md:bg-black/30" />
+          {/* LEFT IMAGE */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="overflow-hidden rounded-[2rem]"
+          >
+            <img
+              src={statsImg}
+              alt="Luxury Home"
+              className="
+                h-[320px]
+                sm:h-[420px]
+                md:h-[500px]
+                lg:h-[560px]
+                w-full
+                object-cover
+              "
+            />
+          </motion.div>
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6">
-
-        <div className="max-w-3xl">
-
-          <motion.p className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] md:tracking-[0.5em] text-zinc-100">
-            Why Choose Us
-          </motion.p>
-
-          <motion.h2 className="mt-6 md:mt-8 font-[Cormorant_Garamond] text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] text-white">
-            Trusted By Homeowners
-            <br />
-            Across The Country
-          </motion.h2>
-
-          <p className="mt-6 md:mt-8 max-w-xl text-sm md:text-base text-zinc-200 leading-relaxed">
-            Delivering exceptional properties and professional services with integrity, innovation and excellence.
-          </p>
-
-        </div>
-
-        {/* STATS */}
-        <div className="mt-16 md:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 md:gap-y-14">
-
-          <div>
-            <h3 className="font-[Cormorant_Garamond] text-4xl sm:text-5xl md:text-6xl">500+</h3>
-            <div className="mt-4 md:mt-5 h-px w-16 md:w-20 bg-white/20" />
-            <p className="mt-4 md:mt-5 text-sm md:text-base text-zinc-200">
-              Properties Available
+          {/* RIGHT CONTENT */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Label */}
+            <p className="text-[10px] uppercase tracking-[0.45em] text-zinc-500">
+              Why Choose Us
             </p>
-          </div>
 
-          <div>
-            <h3 className="font-[Cormorant_Garamond] text-4xl sm:text-5xl md:text-6xl">98%</h3>
-            <div className="mt-4 md:mt-5 h-px w-16 md:w-20 bg-white/20" />
-            <p className="mt-4 md:mt-5 text-sm md:text-base text-zinc-200">
-              Customer Satisfaction
-            </p>
-          </div>
+            {/* Heading */}
+            <h2
+              className="
+                mt-6
+                font-[Cormorant_Garamond]
+                text-3xl
+                md:text-5xl
+                font-semibold
+                leading-[1.05]
+              "
+            >
+              Trusted By Homeowners
+              <br />
+              Across The Country
+            </h2>
 
-          <div>
-            <h3 className="font-[Cormorant_Garamond] text-4xl sm:text-5xl md:text-6xl">25+</h3>
-            <div className="mt-4 md:mt-5 h-px w-16 md:w-20 bg-white/20" />
-            <p className="mt-4 md:mt-5 text-sm md:text-base text-zinc-200">
-              Cities Covered
+            {/* Description */}
+            <p className="mt-6 max-w-lg text-sm md:text-[15px] leading-7 text-zinc-400">
+              Delivering exceptional properties and professional services
+              with integrity, innovation and excellence. We are committed
+              to creating experiences defined by trust, quality, and
+              timeless value.
             </p>
-          </div>
 
-          <div>
-            <h3 className="font-[Cormorant_Garamond] text-4xl sm:text-5xl md:text-6xl">15+</h3>
-            <div className="mt-4 md:mt-5 h-px w-16 md:w-20 bg-white/20" />
-            <p className="mt-4 md:mt-5 text-sm md:text-base text-zinc-200">
-              Years Experience
-            </p>
-          </div>
+            {/* Stats */}
+            <div className="mt-10 space-y-6">
+
+              {stats.map((stat, index) => (
+                <div key={index}>
+
+                  <div className="flex items-center justify-between">
+
+                    <h3 className="font-[Cormorant_Garamond] text-3xl md:text-4xl font-semibold text-white">
+                      {stat.number}
+                    </h3>
+
+                    <p className="text-sm md:text-[15px] text-zinc-400">
+                      {stat.title}
+                    </p>
+
+                  </div>
+
+                  {index !== stats.length - 1 && (
+                    <div className="mt-5 h-px w-full bg-white/10" />
+                  )}
+
+                </div>
+              ))}
+
+            </div>
+          </motion.div>
 
         </div>
 

@@ -25,16 +25,14 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/20" />
 
       {/* MAIN LAYOUT */}
-      <div className="relative z-10 flex h-full max-w-[1400px] flex-col md:flex-row px-6">
-
+      <div className="relative z-10 mx-auto flex h-full max-w-[1300px] flex-col md:flex-row px-6 md:px-8">
         {/* TOP LEFT */}
-        <div className="flex flex-1 flex-col justify-start pt-24 md:pt-36">
-
+        <div className="flex flex-1 flex-col justify-start pt-40 md:pt-48 lg:pt-52">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] md:tracking-[0.5em] text-zinc-400"
+            className="text-[10px] uppercase tracking-[0.4em] text-zinc-400"
           >
             Luxury Real Estate Portfolio
           </motion.p>
@@ -44,14 +42,18 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9 }}
             className="
-              mt-8 md:mt-10
-              font-[Cormorant_Garamond]
-              text-4xl sm:text-5xl md:text-7xl lg:text-8xl
-              font-semibold
-              leading-[1.05]
-              text-white
-              tracking-tight
-            "
+  mt-5
+  font-[Cormorant_Garamond]
+  text-4xl
+  sm:text-5xl
+  md:text-6xl
+  lg:text-[4.8rem]
+  xl:text-[5.3rem]
+  font-semibold
+  leading-[1]
+  tracking-[-0.03em]
+  text-white
+"
           >
             Luxury Homes
             <br />
@@ -62,57 +64,89 @@ export default function Hero() {
         </div>
 
         {/* BOTTOM RIGHT */}
-        <div className="flex flex-1 flex-col justify-end pb-16 md:pb-28">
-
-          <div className="ml-0 md:ml-auto max-w-lg text-left md:text-right">
-
-            {/* Line 1 */}
+        <div className="flex flex-1 flex-col justify-end pb-16 md:pb-24 lg:pb-28">
+          <div className="ml-0 md:ml-auto max-w-md text-left md:text-right">
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.7 }}
-              className="text-base sm:text-lg md:text-2xl leading-snug text-zinc-200"
+              className="
+                text-sm
+                sm:text-base
+                md:text-lg
+                leading-relaxed
+                text-zinc-300
+              "
             >
               Discover exclusive properties
             </motion.p>
 
-            {/* Line 2 */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.7 }}
-              className="text-base sm:text-lg md:text-2xl leading-snug text-zinc-200"
+              className="
+                text-sm
+                sm:text-base
+                md:text-lg
+                leading-relaxed
+                text-zinc-300
+              "
             >
               crafted for elegance, comfort,
             </motion.p>
 
-            {/* Line 3 */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.7 }}
-              className="text-base sm:text-lg md:text-2xl leading-snug text-zinc-200"
+              className="
+                text-sm
+                sm:text-base
+                md:text-lg
+                leading-relaxed
+                text-zinc-300
+              "
             >
               and timeless architectural value.
             </motion.p>
 
-            {/* CTA */}
             <motion.button
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.1, duration: 0.7 }}
               onClick={() => navigate("/properties")}
-              className="mt-8 md:mt-10 mx-auto md:ml-auto md:mx-0 w-fit rounded-full border border-white/20 bg-white/5 px-6 md:px-8 py-3 md:py-4 text-xs md:text-sm text-white backdrop-blur-md transition hover:bg-white/10 hover:scale-105"
+              className="
+                mt-6
+                md:mt-8
+                mx-auto
+                md:ml-auto
+                md:mr-0
+                w-fit
+                rounded-full
+                border
+                border-white/20
+                bg-white/5
+                px-6
+                py-3
+                text-xs
+                uppercase
+                tracking-wider
+                text-white
+                backdrop-blur-md
+                transition
+                hover:bg-white/10
+                hover:scale-105
+              "
             >
               Explore Collections
             </motion.button>
-
           </div>
         </div>
       </div>
 
       {/* Bottom Fade */}
-      <div className="absolute bottom-0 left-0 h-32 md:h-40 w-full bg-gradient-to-t from-black to-transparent" />
+      <div className="absolute bottom-0 left-0 h-28 md:h-36 w-full bg-gradient-to-t from-black to-transparent" />
     </section>
   );
 }
