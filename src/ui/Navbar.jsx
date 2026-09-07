@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -44,6 +46,10 @@ export default function Navbar() {
       });
     }
   };
+
+  const initials = user?.displayName
+    ? user.displayName.split(" ").map((n) => n[0]).join("").toUpperCase()
+    : user?.email?.[0]?.toUpperCase() || "U";
 
   return (
     <header
@@ -108,25 +114,29 @@ export default function Navbar() {
         </nav>
 
         {/* CTA */}
-        <button
-          onClick={() => handleNavClick("#footer")}
-          className="
-            hidden lg:flex
-            rounded-full
-            border
-            border-white/10
-            bg-white
-            px-6
-            py-3
-            text-[13px]
-            font-medium
-            text-black
-            transition
-            hover:scale-105
-          "
-        >
-          Contact Us
-        </button>
+        <div className="hidden lg:flex items-center gap-4">
+          {user ? (
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-black">{initials}</div>
+              <button onClick={() => { logout(); navigate("/"); }} className="text-[13px] text-zinc-300 transition hover:text-white">Log Out</button>
+            </div>
+          ) : (
+            <>
+              <button
+                onClick={() => navigate("/login")}
+                className="text-[13px] tracking-wide text-zinc-300 transition hover:text-white"
+              >
+                Log In
+              </button>
+              <button
+                onClick={() => navigate("/signup")}
+                className="rounded-full border border-white/10 bg-white px-6 py-3 text-[13px] font-medium text-black transition hover:scale-105"
+              >
+                Get Started
+              </button>
+            </>
+          )}
+        </div>
 
         {/* HAMBURGER */}
         <button
@@ -166,20 +176,31 @@ export default function Navbar() {
               </button>
             ))}
 
-            <button
-              onClick={() => handleNavClick("#footer")}
-              className="
-                mt-2
-                rounded-full
-                bg-white
-                py-3
-                text-sm
-                font-medium
-                text-black
-              "
-            >
-              Contact Us
-            </button>
+            <div className="mt-2 flex flex-col gap-3">
+              {user ? (
+                <button
+                  onClick={() => { setMenuOpen(false); logout(); navigate("/"); }}
+                  className="rounded-full bg-white py-3 text-sm font-medium text-black transition"
+                >
+                  Log Out
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={() => { setMenuOpen(false); navigate("/login"); }}
+                    className="rounded-full border border-white/10 py-3 text-sm font-medium text-white transition hover:bg-white/5"
+                  >
+                    Log In
+                  </button>
+                  <button
+                    onClick={() => { setMenuOpen(false); navigate("/signup"); }}
+                    className="rounded-full bg-white py-3 text-sm font-medium text-black transition"
+                  >
+                    Get Started
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
