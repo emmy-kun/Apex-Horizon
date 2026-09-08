@@ -134,6 +134,8 @@ export default function PropertyModal({
                   >
                     <img
                       src={img}
+                      loading="lazy"
+                      decoding="async"
                       className="h-20 w-24 object-cover"
                     />
                   </button>

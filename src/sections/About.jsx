@@ -72,6 +72,8 @@ export default function About() {
             <img
               src={interiorImg}
               alt="Interior"
+              loading="lazy"
+              decoding="async"
               className="
                 h-[180px]
                 md:h-[220px]
@@ -90,6 +92,8 @@ export default function About() {
           <motion.img
             src={exteriorImg}
             alt="Exterior"
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0, scale: 1.03 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}

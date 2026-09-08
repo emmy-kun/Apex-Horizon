@@ -15,7 +15,7 @@ const agents = [
     quote:
       "Helping clients secure exceptional homes with confidence, elegance, and a seamless experience.",
     image:
-      "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=400&q=80&fm=webp",
   },
   {
     name: "Daniel Williams",
@@ -23,7 +23,7 @@ const agents = [
     quote:
       "Delivering exceptional experiences and helping clients acquire remarkable homes with confidence and discretion.",
     image:
-      "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=400&q=80&fm=webp",
   },
   {
     name: "Sophia Williams",
@@ -31,7 +31,7 @@ const agents = [
     quote:
       "Dedicated to delivering world-class service and connecting clients with remarkable residences.",
     image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80&fm=webp",
   },
 ];
 
@@ -103,6 +103,8 @@ export default function Agents() {
                     <img
                       src={agent.image}
                       alt={agent.name}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover"
                     />
                   </div>

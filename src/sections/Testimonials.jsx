@@ -6,7 +6,7 @@ const testimonials = [
     name: "Daniel Carter",
     location: "London, UK",
     image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800",
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&fm=webp&fit=crop&q=80",
     quote:
       "The entire process felt seamless. From viewing to closing, everything was handled with absolute professionalism.",
   },
@@ -14,7 +14,7 @@ const testimonials = [
     name: "Emily Johnson",
     location: "Dubai, UAE",
     image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800",
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&fm=webp&fit=crop&q=80",
     quote:
       "Exceptional service and attention to detail. They truly understand luxury real estate at the highest level.",
   },
@@ -22,7 +22,7 @@ const testimonials = [
     name: "Michael Stevens",
     location: "New York, USA",
     image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800",
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&fm=webp&fit=crop&q=80",
     quote:
       "A premium experience from start to finish. I found my dream property without stress or delays.",
   },
@@ -79,6 +79,8 @@ export default function Testimonials() {
                 <img
                   src={testimonials[current].image}
                   alt=""
+                  loading="lazy"
+                  decoding="async"
                   className="
                     h-[320px]
                     md:h-[400px]
@@ -140,6 +142,8 @@ export default function Testimonials() {
               <img
                 src={nextPerson.image}
                 alt=""
+                loading="lazy"
+                decoding="async"
                 className="
                   h-16
                   w-16

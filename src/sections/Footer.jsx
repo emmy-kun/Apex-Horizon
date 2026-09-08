@@ -17,6 +17,8 @@ export default function Footer() {
     <img
       src={logo}
       alt="Apex Horizon Logo"
+      loading="lazy"
+      decoding="async"
       className="h-16 w-16 md:h-20 md:w-20 object-contain"
     />
 

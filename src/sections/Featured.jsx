@@ -131,6 +131,8 @@ export default function Featured() {
             <img
               src={properties[current].image}
               alt={properties[current].title}
+              loading="lazy"
+              decoding="async"
               className="
                 h-[320px]
                 sm:h-[400px]
@@ -261,7 +263,7 @@ export default function Featured() {
                 hover:scale-105
               "
             >
-              View Property
+              View More Properties
             </button>
 
           </div>

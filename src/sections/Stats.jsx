@@ -38,6 +38,8 @@ export default function Stats() {
             <img
               src={statsImg}
               alt="Luxury Home"
+              loading="lazy"
+              decoding="async"
               className="
                 h-[320px]
                 sm:h-[420px]

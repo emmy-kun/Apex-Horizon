@@ -6,7 +6,7 @@ import PropertyModal from "../components/PropertyModal";
 const propertiesData = [
   {
     image:
-      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&fm=webp",
     title: "Oceanview Residence",
     location: "Miami, Florida",
     type: "Villa",
@@ -18,7 +18,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&fm=webp",
     title: "Modern Horizon Villa",
     location: "Los Angeles, California",
     type: "Villa",
@@ -30,7 +30,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&fm=webp",
     title: "Royal Heights",
     location: "London, UK",
     type: "Penthouse",
@@ -42,7 +42,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&fm=webp",
     title: "Palm Retreat",
     location: "Dubai, UAE",
     type: "Villa",
@@ -54,7 +54,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&fm=webp",
     title: "Skyline Manor",
     location: "New York, USA",
     type: "Apartment",
@@ -66,7 +66,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&fm=webp",
     title: "Grand Estate",
     location: "Beverly Hills, California",
     type: "Villa",
@@ -78,7 +78,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&fm=webp",
     title: "Crystal Heights",
     location: "Toronto, Canada",
     type: "Apartment",
@@ -90,7 +90,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&fm=webp",
     title: "Azure Villa",
     location: "Santorini, Greece",
     type: "Villa",
@@ -102,7 +102,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&fm=webp",
     title: "Emerald Mansion",
     location: "Paris, France",
     type: "Penthouse",
@@ -114,7 +114,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=800&fm=webp",
     title: "Golden Sands Villa",
     location: "Dubai, UAE",
     type: "Villa",
@@ -126,7 +126,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&fm=webp",
     title: "Nordic Retreat",
     location: "Oslo, Norway",
     type: "Villa",
@@ -138,7 +138,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=800&fm=webp",
     title: "Harbor Lights",
     location: "Sydney, Australia",
     type: "Apartment",
@@ -150,7 +150,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=800&fm=webp",
     title: "Royal Palm Estate",
     location: "Miami, Florida",
     type: "Villa",
@@ -162,7 +162,7 @@ const propertiesData = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&fm=webp",
     title: "Glass Horizon",
     location: "Los Angeles, California",
     type: "Penthouse",
@@ -176,8 +176,8 @@ const propertiesData = [
 
 const getGallery = (item) => [
   item.image,
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000",
-  "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=2000",
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&fm=webp",
+  "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&fm=webp",
 ];
 
 export default function Property() {
@@ -325,6 +325,8 @@ export default function Property() {
                 <img
                   src={property.image}
                   alt={property.title}
+                  loading="lazy"
+                  decoding="async"
                   className="
                     h-[280px]
                     sm:h-[320px]

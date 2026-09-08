@@ -5,10 +5,10 @@ import Footer from "../sections/Footer";
 
 /* SAMPLE IMAGES (replace anytime) */
 const images = [
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9",
-  "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4",
-  "https://images.unsplash.com/photo-1600566752355-35792bedcfea",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1400&fm=webp&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&fm=webp&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=1400&fm=webp&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1400&fm=webp&fit=crop&q=80",
 ];
 
 const property = {
@@ -36,19 +36,19 @@ const features = [
 const similar = [
   {
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&fm=webp&fit=crop&q=80",
     title: "Skyline Mansion",
     price: "$4.2M",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&fm=webp&fit=crop&q=80",
     title: "Modern Glass Estate",
     price: "$5.1M",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1600566752229-250ed79470f5",
+      "https://images.unsplash.com/photo-1600566752229-250ed79470f5?w=600&fm=webp&fit=crop&q=80",
     title: "Royal Penthouse",
     price: "$6.8M",
   },
@@ -92,6 +92,8 @@ export default function PropertyDetails() {
                   key={i}
                   src={img}
                   onClick={() => setMainImage(img)}
+                  loading="lazy"
+                  decoding="async"
                   className={`h-24 w-32 object-cover rounded-xl cursor-pointer border transition ${
                     mainImage === img
                       ? "border-white"
@@ -201,6 +203,8 @@ export default function PropertyDetails() {
                 <div className="h-52 overflow-hidden">
                   <img
                     src={item.image}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-110 transition"
                   />
                 </div>
