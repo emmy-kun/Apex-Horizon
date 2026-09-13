@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import logo from "../assets/logo.png";
 
 export default function Login() {
-  const { login, googleSignIn } = useAuth();
+  const { login, googleSignIn, getAuthErrorMessage } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
@@ -19,12 +19,18 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    if (!form.email.trim() || !form.password.trim()) {
+      setError("Please enter both your email address and password.");
+      return;
+    }
+
     setLoading(true);
     try {
       await login(form.email, form.password);
       navigate("/");
     } catch (err) {
-      setError(err.message || "Failed to sign in.");
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -37,7 +43,7 @@ export default function Login() {
       await googleSignIn();
       navigate("/");
     } catch (err) {
-      setError(err.message || "Google sign-in failed.");
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }

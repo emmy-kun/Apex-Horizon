@@ -11,6 +11,35 @@ import { auth, googleProvider } from "../firebase";
 
 const AuthContext = createContext();
 
+export const getAuthErrorMessage = (error) => {
+  const code = error?.code || "";
+
+  switch (code) {
+    case "auth/invalid-email":
+      return "Please enter a valid email address.";
+    case "auth/user-not-found":
+      return "We couldn’t find an account for that email address.";
+    case "auth/wrong-password":
+      return "The password you entered is incorrect. Please try again.";
+    case "auth/invalid-credential":
+      return "The email or password you entered is incorrect. Please try again.";
+    case "auth/email-already-in-use":
+      return "An account with this email address already exists.";
+    case "auth/weak-password":
+      return "Your password is too weak. Please use at least 8 characters with a mix of letters, numbers, and symbols.";
+    case "auth/popup-closed-by-user":
+      return "Google sign-in was cancelled. Please try again.";
+    case "auth/account-exists-with-different-credential":
+      return "This account already exists with a different sign-in method.";
+    case "auth/network-request-failed":
+      return "We couldn’t connect to the server. Please check your internet connection and try again.";
+    case "auth/too-many-requests":
+      return "Too many sign-in attempts. Please wait a moment before trying again.";
+    default:
+      return "We couldn’t complete that request. Please try again in a moment.";
+  }
+};
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -41,7 +70,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, login, signup, googleSignIn, logout, updateName }}
+      value={{ user, loading, login, signup, googleSignIn, logout, updateName, getAuthErrorMessage }}
     >
       {children}
     </AuthContext.Provider>

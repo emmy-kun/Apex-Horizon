@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import logo from "../assets/logo.png";
 
 export default function Signup() {
-  const { signup: doSignup, googleSignIn, updateName } = useAuth();
+  const { signup: doSignup, googleSignIn, updateName, getAuthErrorMessage } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ fullName: "", email: "", password: "" });
@@ -19,15 +19,25 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!agreed) return;
     setError("");
+
+    if (!agreed) {
+      setError("Please accept the Terms of Service and Privacy Policy to continue.");
+      return;
+    }
+
+    if (!form.fullName.trim() || !form.email.trim() || !form.password.trim()) {
+      setError("Please complete all fields before creating your account.");
+      return;
+    }
+
     setLoading(true);
     try {
       await doSignup(form.email, form.password);
       if (form.fullName) await updateName(form.fullName);
       navigate("/");
     } catch (err) {
-      setError(err.message || "Failed to create account.");
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -40,7 +50,7 @@ export default function Signup() {
       await googleSignIn();
       navigate("/");
     } catch (err) {
-      setError(err.message || "Google sign-in failed.");
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }
