@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff, FiArrowRight, FiLoader } from "react-icons/fi";
@@ -6,12 +6,20 @@ import { useAuth } from "../context/AuthContext";
 import logo from "../assets/logo.png";
 
 export default function Login() {
-  const { login, googleSignIn, getAuthErrorMessage } = useAuth();
+  const { user, login, googleSignIn, redirectError, getAuthErrorMessage } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (user) navigate("/", { replace: true });
+  }, [user, navigate]);
+
+  useEffect(() => {
+    if (redirectError) setError(getAuthErrorMessage(redirectError));
+  }, [redirectError, getAuthErrorMessage]);
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));

@@ -1,13 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   onAuthStateChanged,
+  getRedirectResult,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signInWithPopup,
+  signInWithRedirect,
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { auth, googleProvider } from "../firebase";
+import { appleProvider, auth, googleProvider } from "../firebase";
 
 const AuthContext = createContext();
 
@@ -33,6 +34,12 @@ export const getAuthErrorMessage = (error) => {
       return "This account already exists with a different sign-in method.";
     case "auth/network-request-failed":
       return "We couldn’t connect to the server. Please check your internet connection and try again.";
+    case "auth/operation-not-allowed":
+      return "This sign-in method is not enabled yet. Please enable it in the Firebase Authentication settings.";
+    case "auth/unauthorized-domain":
+      return "This website is not authorized for sign-in yet. Add its domain in the Firebase Authentication settings.";
+    case "auth/popup-blocked":
+      return "Your browser blocked the sign-in window. Allow pop-ups for this site and try again.";
     case "auth/too-many-requests":
       return "Too many sign-in attempts. Please wait a moment before trying again.";
     default:
@@ -43,6 +50,7 @@ export const getAuthErrorMessage = (error) => {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [redirectError, setRedirectError] = useState(null);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
@@ -52,13 +60,19 @@ export function AuthProvider({ children }) {
     return unsub;
   }, []);
 
+  useEffect(() => {
+    getRedirectResult(auth).catch(setRedirectError);
+  }, []);
+
   const login = (email, password) =>
     signInWithEmailAndPassword(auth, email, password);
 
   const signup = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
 
-  const googleSignIn = () => signInWithPopup(auth, googleProvider);
+  const googleSignIn = () => signInWithRedirect(auth, googleProvider);
+
+  const appleSignIn = () => signInWithRedirect(auth, appleProvider);
 
   const logout = () => signOut(auth);
 
@@ -70,7 +84,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, login, signup, googleSignIn, logout, updateName, getAuthErrorMessage }}
+      value={{ user, loading, redirectError, login, signup, googleSignIn, appleSignIn, logout, updateName, getAuthErrorMessage }}
     >
       {children}
     </AuthContext.Provider>
