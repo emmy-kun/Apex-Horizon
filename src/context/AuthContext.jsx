@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
   onAuthStateChanged,
   getRedirectResult,
@@ -49,18 +49,22 @@ export const getAuthErrorMessage = (error) => {
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [redirectChecked, setRedirectChecked] = useState(false);
   const [redirectError, setRedirectError] = useState(null);
+  const redirectCheckStarted = useRef(false);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
       setUser(u);
-      setLoading(false);
+      setAuthLoading(false);
     });
     return unsub;
   }, []);
 
   useEffect(() => {
+    if (redirectCheckStarted.current) return;
+    redirectCheckStarted.current = true;
     let active = true;
 
     getRedirectResult(auth)
@@ -69,6 +73,9 @@ export function AuthProvider({ children }) {
       })
       .catch((error) => {
         if (active) setRedirectError(error);
+      })
+      .finally(() => {
+        if (active) setRedirectChecked(true);
       });
 
     return () => {
@@ -96,7 +103,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, redirectError, login, signup, googleSignIn, appleSignIn, logout, updateName, getAuthErrorMessage }}
+      value={{ user, loading: authLoading || !redirectChecked, redirectError, login, signup, googleSignIn, appleSignIn, logout, updateName, getAuthErrorMessage }}
     >
       {children}
     </AuthContext.Provider>
