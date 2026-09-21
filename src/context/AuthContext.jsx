@@ -61,7 +61,19 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    getRedirectResult(auth).catch(setRedirectError);
+    let active = true;
+
+    getRedirectResult(auth)
+      .then((result) => {
+        if (active && result?.user) setUser(result.user);
+      })
+      .catch((error) => {
+        if (active) setRedirectError(error);
+      });
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   const login = (email, password) =>
