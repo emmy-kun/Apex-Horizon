@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   onAuthStateChanged,
   getRedirectResult,
@@ -11,6 +11,7 @@ import {
 import { appleProvider, auth, googleProvider } from "../firebase";
 
 const AuthContext = createContext();
+const redirectResultPromise = getRedirectResult(auth);
 
 export const getAuthErrorMessage = (error) => {
   const code = error?.code || "";
@@ -52,7 +53,6 @@ export function AuthProvider({ children }) {
   const [authLoading, setAuthLoading] = useState(true);
   const [redirectChecked, setRedirectChecked] = useState(false);
   const [redirectError, setRedirectError] = useState(null);
-  const redirectCheckStarted = useRef(false);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
@@ -63,11 +63,9 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    if (redirectCheckStarted.current) return;
-    redirectCheckStarted.current = true;
     let active = true;
 
-    getRedirectResult(auth)
+    redirectResultPromise
       .then((result) => {
         if (active && result?.user) setUser(result.user);
       })
