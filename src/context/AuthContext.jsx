@@ -9,7 +9,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { appleProvider, auth, googleProvider } from "../firebase";
+import { auth, googleProvider } from "../firebase";
 
 const AuthContext = createContext();
 const redirectResultPromise = getRedirectResult(auth);
@@ -101,8 +101,6 @@ export function AuthProvider({ children }) {
 
   const googleSignIn = () => signInWithProvider(googleProvider);
 
-  const appleSignIn = () => signInWithProvider(appleProvider);
-
   const logout = () => signOut(auth);
 
   const updateName = (name) => {
@@ -113,7 +111,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading: authLoading || !redirectChecked, redirectError, login, signup, googleSignIn, appleSignIn, logout, updateName, getAuthErrorMessage }}
+      value={{ user, loading: authLoading || !redirectChecked, redirectError, login, signup, googleSignIn, logout, updateName, getAuthErrorMessage }}
     >
       {children}
     </AuthContext.Provider>
