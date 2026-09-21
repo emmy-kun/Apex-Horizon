@@ -4,6 +4,7 @@ import {
   getRedirectResult,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signInWithPopup,
   signInWithRedirect,
   signOut,
   updateProfile,
@@ -87,9 +88,20 @@ export function AuthProvider({ children }) {
   const signup = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
 
-  const googleSignIn = () => signInWithRedirect(auth, googleProvider);
+  const signInWithProvider = async (provider) => {
+    try {
+      return await signInWithPopup(auth, provider);
+    } catch (error) {
+      if (error?.code === "auth/popup-blocked") {
+        return signInWithRedirect(auth, provider);
+      }
+      throw error;
+    }
+  };
 
-  const appleSignIn = () => signInWithRedirect(auth, appleProvider);
+  const googleSignIn = () => signInWithProvider(googleProvider);
+
+  const appleSignIn = () => signInWithProvider(appleProvider);
 
   const logout = () => signOut(auth);
 
